@@ -77,11 +77,6 @@
             <header class="sticky top-0 z-30 flex items-center justify-between border-b border-white/5 bg-[#121217]/80 px-6 py-3.5 backdrop-blur-md">
                 {{-- Search & Live Console Pill --}}
                 <div class="flex items-center gap-4">
-                    <div class="relative hidden sm:block">
-                        <x-icon name="search" class="pointer-events-none absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-white/35" />
-                        <input type="text" placeholder="Cari modul atau data..."
-                            class="w-64 rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-4 text-xs text-white placeholder:text-white/35 focus:border-white/20 focus:outline-none sm:w-72">
-                    </div>
                     <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[11px] text-white/70">
                         <span class="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
                         <span>Live Console</span>

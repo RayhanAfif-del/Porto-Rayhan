@@ -54,7 +54,7 @@ class EducationController extends Controller
     {
         $data = $request->validate([
             'school' => ['required', 'string', 'max:150'],
-            'major' => ['required', 'string', 'max:150'],
+            'major' => ['nullable', 'string', 'max:150'],
             'period' => ['nullable', 'string', 'max:100'],
             'description' => ['nullable', 'string', 'max:1000'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:9999'],

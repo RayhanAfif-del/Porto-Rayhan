@@ -69,7 +69,7 @@
                         <div class="relative">
                             <x-icon name="graduation-cap" class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-white/35" />
                             <input type="text" id="school" name="school" value="{{ old('school', $item->school) }}" required
-                                placeholder="SMK Negeri 1 Cimahi"
+                                placeholder="Masukkan Nama Sekolah atau Institusi"
                                 class="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-white/30 focus:border-coral focus:outline-none transition">
                         </div>
                         @error('school')
@@ -87,8 +87,8 @@
                         </div>
                         <div class="relative">
                             <x-icon name="pen" class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-white/35" />
-                            <input type="text" id="major" name="major" value="{{ old('major', $item->major) }}" required
-                                placeholder="Pengembangan Perangkat Lunak dan Gim (PPLG)"
+                            <input type="text" id="major" name="major" value="{{ old('major', $item->major) }}"
+                                placeholder="Masukkan Program Studi"
                                 class="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-white/30 focus:border-coral focus:outline-none transition">
                         </div>
                         @error('major')
@@ -103,9 +103,9 @@
                                 Periode
                             </label>
                             <div class="relative">
-                                <x-icon name="clock" class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-white/35" />
-                                <input type="text" id="period" name="period" value="{{ old('period', $item->period ?? '2022 — Sekarang') }}"
-                                    placeholder="2022 — Sekarang"
+                                <x-icon name="clock" class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-white/35"/>
+                                <input type="text" id="period" name="period"
+                                    placeholder="Contoh : 2022 — Sekarang"
                                     class="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-white/30 focus:border-coral focus:outline-none transition">
                             </div>
                             @error('period')
@@ -119,7 +119,8 @@
                             </label>
                             <div class="relative">
                                 <x-icon name="dashboard" class="pointer-events-none absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-white/35" />
-                                <input type="number" id="sort_order" name="sort_order" value="{{ old('sort_order', $item->sort_order ?? 0) }}" min="0" max="999"
+                                <input type="number" id="sort_order" name="sort_order"
+                                    placeholder="Contoh : 0"
                                     class="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-xs text-white placeholder:text-white/30 focus:border-coral focus:outline-none transition">
                             </div>
                             <p class="mt-1.5 font-mono text-[10px] text-white/40">Prioritas di portofolio (0 = paling atas).</p>
@@ -138,7 +139,7 @@
                             <span class="font-mono text-[10px] text-white/40">Ringkasan portofolio</span>
                         </div>
                         <textarea id="description" name="description" rows="4"
-                            placeholder="Mempelajari pemrograman web, basis data, dan perancangan antarmuka pengguna."
+                            placeholder="Berikan deskripsi singkat tentang pengalaman pembelajaran Anda di sekolah"
                             class="w-full rounded-xl border border-white/10 bg-white/[0.03] p-4 text-xs leading-relaxed text-white placeholder:text-white/30 focus:border-coral focus:outline-none transition">{{ old('description', $item->description) }}</textarea>
                         @error('description')
                             <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
@@ -214,26 +215,6 @@
                         </form>
                     </div>
                 @endif
-            </div>
-        </div>
-
-        {{-- Bottom Action Bar --}}
-        <div class="rounded-2xl border border-white/5 bg-[#17171d] p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
-            <div class="flex items-center gap-2 font-mono text-xs text-white/70">
-                <span class="size-1.5 rounded-full bg-coral"></span>
-                <span>Data siap diperbarui ke portofolio</span>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <a href="{{ route('admin.education.index') }}"
-                    class="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-white/70 transition hover:bg-white/[0.08] hover:text-white">
-                    Batal
-                </a>
-                <button type="button" onclick="document.getElementById('education-form').submit()"
-                    class="flex items-center gap-1.5 rounded-xl bg-coral px-5 py-2 text-xs font-semibold text-white shadow-lg shadow-coral/25 transition hover:bg-coral-dark">
-                    <span>{{ $item->exists ? 'Simpan Perubahan' : 'Simpan Pendidikan' }}</span>
-                    <x-icon name="arrow-up-right" class="size-3.5" />
-                </button>
             </div>
         </div>
     </div>

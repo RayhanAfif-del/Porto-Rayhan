@@ -8,10 +8,9 @@
         <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
             <div>
                 <div class="flex items-center gap-2 font-mono text-[11px] tracking-wider text-white/50 uppercase">
-                    <span class="size-2 rounded-full bg-coral"></span>
-                    <span>Portofolio</span>
-                    <span class="text-white/20">/</span>
-                    <span class="text-white/80">Pendidikan</span>
+                <p class="font-mono text-[11px] tracking-[0.2em] text-white/40 uppercase">
+                    Portofolio / Pendidikan
+                </p>
                 </div>
                 <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Kelola Pendidikan</h1>
                 <p class="mt-1 text-xs text-white/50 sm:text-sm">
@@ -30,21 +29,6 @@
 
         {{-- Filter Tabs & Search Bar --}}
         <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-            <div class="flex flex-wrap items-center gap-2" id="edu-filter-tabs">
-                <button type="button" data-filter="all"
-                    class="edu-filter-btn active rounded-xl bg-coral px-4 py-2 text-xs font-semibold text-white shadow-md shadow-coral/20 transition">
-                    Semua ({{ $items->count() }})
-                </button>
-                <button type="button" data-filter="formal"
-                    class="edu-filter-btn rounded-xl px-4 py-2 text-xs font-medium text-white/60 transition hover:bg-white/5 hover:text-white">
-                    Formal ({{ $items->count() }})
-                </button>
-                <button type="button" data-filter="non-formal"
-                    class="edu-filter-btn rounded-xl px-4 py-2 text-xs font-medium text-white/60 transition hover:bg-white/5 hover:text-white">
-                    Non-Formal (0)
-                </button>
-            </div>
-
             <div class="relative w-full sm:w-64">
                 <x-icon name="search" class="pointer-events-none absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-white/35" />
                 <input type="text" id="education-search" placeholder="Cari pendidikan..."
