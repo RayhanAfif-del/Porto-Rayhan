@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="1200" height="850" role="img" aria-label="GAMBAR SERTIFIKAT">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#efece7"/><stop offset="1" stop-color="#d8d3cb"/></linearGradient></defs>
+<rect width="1200" height="850" fill="url(#g)"/>
+<g stroke="#111111" stroke-opacity=".08" stroke-width="1"><line x1="0" y1="0" x2="0" y2="850"/><line x1="100" y1="0" x2="100" y2="850"/><line x1="200" y1="0" x2="200" y2="850"/><line x1="300" y1="0" x2="300" y2="850"/><line x1="400" y1="0" x2="400" y2="850"/><line x1="500" y1="0" x2="500" y2="850"/><line x1="600" y1="0" x2="600" y2="850"/><line x1="700" y1="0" x2="700" y2="850"/><line x1="800" y1="0" x2="800" y2="850"/><line x1="900" y1="0" x2="900" y2="850"/><line x1="1000" y1="0" x2="1000" y2="850"/><line x1="1100" y1="0" x2="1100" y2="850"/><line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="106" x2="1200" y2="106"/><line x1="0" y1="212" x2="1200" y2="212"/><line x1="0" y1="318" x2="1200" y2="318"/><line x1="0" y1="424" x2="1200" y2="424"/><line x1="0" y1="530" x2="1200" y2="530"/><line x1="0" y1="636" x2="1200" y2="636"/><line x1="0" y1="742" x2="1200" y2="742"/><line x1="0" y1="848" x2="1200" y2="848"/></g>
+<circle cx="936" cy="238" r="76" fill="#ff5a4d" fill-opacity=".9"/>
+<text x="600" y="425" fill="#111111" fill-opacity=".55" font-family="Arial, sans-serif" font-size="38" text-anchor="middle" letter-spacing="4">GAMBAR SERTIFIKAT</text>
+</svg>
