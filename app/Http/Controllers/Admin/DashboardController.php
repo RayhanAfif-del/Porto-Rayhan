@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Certificate;
 use App\Models\ContactMessage;
 use App\Models\Education;
+use App\Models\Experience;
 use App\Models\Project;
 use Illuminate\View\View;
 
@@ -16,14 +16,14 @@ class DashboardController extends Controller
         $projectsCount = Project::count();
         $publishedProjectsCount = Project::where('published', true)->count();
         $educationCount = Education::count();
-        $certificatesCount = Certificate::count();
+        $experiencesCount = Experience::count();
         $unreadMessagesCount = ContactMessage::whereNull('read_at')->count();
 
         return view('admin.dashboard', [
             'projectsCount' => $projectsCount,
             'publishedProjectsCount' => $publishedProjectsCount,
             'educationCount' => $educationCount,
-            'certificatesCount' => $certificatesCount,
+            'experiencesCount' => $experiencesCount,
             'unreadMessagesCount' => $unreadMessagesCount,
             'latestProjects' => Project::orderBy('sort_order')->orderBy('id')->limit(4)->get(),
             'primaryEducation' => Education::orderBy('sort_order')->orderBy('id')->first(),

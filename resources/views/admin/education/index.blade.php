@@ -119,24 +119,34 @@
                 <span class="font-mono text-xs text-white/40">Tersinkronisasi</span>
             </div>
 
+            @php
+                $defaultExperiences = config('portfolio.experiences', []);
+                $rawExp = setting('experience.items', $defaultExperiences);
+                $previewExperiences = is_string($rawExp) ? (json_decode($rawExp, true) ?? $defaultExperiences) : $rawExp;
+                if (! is_array($previewExperiences)) {
+                    $previewExperiences = $defaultExperiences;
+                }
+            @endphp
+
             <div class="overflow-hidden rounded-2xl border border-white/5 bg-[#121217] p-6 sm:p-8 shadow-xl">
                 <div class="space-y-6">
                     <div>
                         <div class="flex items-center gap-2 font-mono text-xs text-white/50 uppercase tracking-widest">
                             <span class="size-1.5 rounded-full bg-coral"></span>
-                            <span>Education &amp; Certificates</span>
+                            <span>Education &amp; Experience</span>
                         </div>
                         <h2 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                            Learning that shapes how I build.
+                            Learning &amp; journey that shapes how I build.
                         </h2>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-8 pt-4 lg:grid-cols-2">
+                    <div class="grid gap-8 pt-4 lg:grid-cols-2 lg:gap-10">
                         {{-- Education Column --}}
                         <div>
-                            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">
-                                Education
-                            </h3>
+                            <div class="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/70">
+                                <x-icon name="graduation-cap" class="size-4 text-coral" />
+                                <span>Pendidikan Formal</span>
+                            </div>
                             <div class="space-y-6">
                                 @forelse ($items as $edu)
                                     <div class="relative border-l border-white/10 pb-6 pl-6 last:pb-0">
@@ -154,45 +164,36 @@
                             </div>
                         </div>
 
-                        {{-- Certificates Column --}}
+                        {{-- Experience Column --}}
                         <div>
-                            <h3 class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">
-                                Certificates
-                            </h3>
-                            @if (isset($certificates) && $certificates->isNotEmpty())
-                                <div class="space-y-3">
-                                    @foreach ($certificates as $cert)
-                                        <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4 flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-3 min-w-0">
-                                                <div class="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-coral">
-                                                    <x-icon name="badge-check" class="size-4" />
-                                                </div>
-                                                <div class="min-w-0">
-                                                    <p class="truncate text-xs font-semibold text-white">{{ $cert->title }}</p>
-                                                    <p class="truncate text-[10px] text-white/40">{{ $cert->issuer }} · {{ $cert->issued_at?->format('Y') }}</p>
-                                                </div>
+                            <div class="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/70">
+                                <x-icon name="briefcase" class="size-4 text-coral" />
+                                <span>Pengalaman &amp; Proyek Lapangan</span>
+                            </div>
+                            <div class="space-y-6">
+                                @forelse ($previewExperiences as $exp)
+                                    <div class="relative border-l border-white/10 pb-6 pl-6 last:pb-0">
+                                        <span class="absolute -left-[5px] top-1.5 size-2 rounded-full bg-coral"></span>
+                                        @if (!empty($exp['period']))
+                                            <p class="font-mono text-xs text-white/50">{{ $exp['period'] }}</p>
+                                        @endif
+                                        <h4 class="mt-1 text-base font-bold text-white">{{ $exp['role'] ?? 'Peran' }}</h4>
+                                        <p class="mt-0.5 text-xs font-semibold text-coral">{{ $exp['company'] ?? 'Instansi / Klien' }}</p>
+                                        @if (!empty($exp['description']))
+                                            <p class="mt-2 text-xs leading-relaxed text-white/60">{{ $exp['description'] }}</p>
+                                        @endif
+                                        @if (!empty($exp['skills']) && is_array($exp['skills']))
+                                            <div class="mt-2.5 flex flex-wrap gap-1.5">
+                                                @foreach ($exp['skills'] as $skill)
+                                                    <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-white/60">{{ $skill }}</span>
+                                                @endforeach
                                             </div>
-                                            @if ($cert->verification_url)
-                                                <a href="{{ $cert->verification_url }}" target="_blank" rel="noopener" class="text-white/40 hover:text-white">
-                                                    <x-icon name="external-link" class="size-3.5" />
-                                                </a>
-                                            @endif
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @else
-                                <div class="rounded-xl border border-white/5 bg-white/[0.02] p-5 flex items-start gap-3.5">
-                                    <div class="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-coral">
-                                        <x-icon name="badge-check" class="size-4" />
+                                        @endif
                                     </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-white/90">Sertifikasi belum ditambahkan</p>
-                                        <p class="mt-1 text-xs leading-relaxed text-white/40">
-                                            Tambahkan data asli ke modul sertifikat agar tampil di kartu pendamping ini.
-                                        </p>
-                                    </div>
-                                </div>
-                            @endif
+                                @empty
+                                    <p class="text-xs text-white/40">Data pengalaman belum ditambahkan.</p>
+                                @endforelse
+                            </div>
                         </div>
                     </div>
                 </div>

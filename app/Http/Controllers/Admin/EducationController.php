@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Certificate;
 use App\Models\Education;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,7 +14,6 @@ class EducationController extends Controller
     {
         return view('admin.education.index', [
             'items' => Education::orderBy('sort_order')->orderBy('id')->get(),
-            'certificates' => Certificate::orderBy('sort_order')->orderBy('id')->get(),
         ]);
     }
 

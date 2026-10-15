@@ -1,11 +1,17 @@
 @php
-    $c = config('portfolio.contact');
-    $wa = $c['whatsapp'] ? 'https://wa.me/'.preg_replace('/\D/', '', $c['whatsapp']) : null;
+    $c = [
+        'email' => setting('contact.email', config('portfolio.contact.email')),
+        'github' => setting('contact.github', config('portfolio.contact.github')),
+        'linkedin' => setting('contact.linkedin', config('portfolio.contact.linkedin')),
+        'whatsapp' => setting('contact.whatsapp', config('portfolio.contact.whatsapp')),
+    ];
+    $waClean = $c['whatsapp'] ? preg_replace('/\D/', '', $c['whatsapp']) : null;
+    $wa = $waClean ? 'https://wa.me/'.$waClean : null;
     $channels = [
         ['Email', $c['email'] ? 'mailto:'.$c['email'] : null, $c['email'], 'mail'],
         ['GitHub', $c['github'], $c['github'] ? preg_replace('#^https?://(www\.)?#', '', $c['github']) : null, 'github'],
         ['LinkedIn', $c['linkedin'], $c['linkedin'] ? preg_replace('#^https?://(www\.)?#', '', $c['linkedin']) : null, 'linkedin'],
-        ['WhatsApp', $wa, $c['whatsapp'] ? '+'.preg_replace('/\D/', '', $c['whatsapp']) : null, 'whatsapp'],
+        ['WhatsApp', $wa, $waClean ? '+'.$waClean : null, 'whatsapp'],
     ];
 @endphp
 

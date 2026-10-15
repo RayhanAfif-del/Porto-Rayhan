@@ -129,24 +129,6 @@
                     @error('image')
                         <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
                     @enderror
-
-                    {{-- Additional Mock Shots Strip --}}
-                    <div class="flex items-center gap-3 pt-2 overflow-x-auto">
-                        <div class="flex size-14 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                            <x-icon name="image" class="size-5 text-white/30" />
-                        </div>
-                        <div class="flex size-14 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                            <x-icon name="image" class="size-5 text-white/30" />
-                        </div>
-                        <div class="flex size-14 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                            <x-icon name="image" class="size-5 text-white/30" />
-                        </div>
-                        <button type="button" onclick="document.getElementById('cover-file-input').click()"
-                            class="flex h-14 shrink-0 items-center gap-1.5 rounded-xl border border-dashed border-white/15 px-3 font-mono text-[10px] text-white/40 transition hover:border-white/30 hover:text-white">
-                            <x-icon name="plus" class="size-3.5" />
-                            <span>Tambah Shot</span>
-                        </button>
-                    </div>
                 </div>
 
                 {{-- Card 3: Deskripsi & Cerita Proyek --}}
@@ -156,11 +138,23 @@
                             <x-icon name="pen" class="size-4 text-coral" />
                             <h2 class="text-xs font-bold uppercase tracking-wider text-white">Deskripsi</h2>
                         </div>
-                        <div class="flex items-center gap-1 text-white/40 font-mono text-[11px]">
-                            <span class="px-1.5 py-0.5 rounded border border-white/5 hover:text-white cursor-pointer font-bold">B</span>
-                            <span class="px-1.5 py-0.5 rounded border border-white/5 hover:text-white cursor-pointer italic">I</span>
-                            <span class="px-1.5 py-0.5 rounded border border-white/5 hover:text-white cursor-pointer">🔗</span>
-                            <span class="px-1.5 py-0.5 rounded border border-white/5 hover:text-white cursor-pointer">&lt;/&gt;</span>
+                        <div class="flex items-center gap-1 font-mono text-[11px]">
+                            <button type="button" onclick="formatDescription('bold')" title="Tebal / Bold (**teks**)"
+                                class="flex size-6 items-center justify-center rounded border border-white/10 bg-white/[0.04] text-white/70 hover:bg-white/10 hover:text-white transition font-bold">
+                                B
+                            </button>
+                            <button type="button" onclick="formatDescription('italic')" title="Miring / Italic (*teks*)"
+                                class="flex size-6 items-center justify-center rounded border border-white/10 bg-white/[0.04] text-white/70 hover:bg-white/10 hover:text-white transition italic">
+                                I
+                            </button>
+                            <button type="button" onclick="formatDescription('link')" title="Sisipkan Tautan ([teks](url))"
+                                class="flex size-6 items-center justify-center rounded border border-white/10 bg-white/[0.04] text-white/70 hover:bg-white/10 hover:text-white transition text-xs">
+                                🔗
+                            </button>
+                            <button type="button" onclick="formatDescription('code')" title="Kode Inline (`kode`)"
+                                class="flex size-6 items-center justify-center rounded border border-white/10 bg-white/[0.04] text-white/70 hover:bg-white/10 hover:text-white transition text-[10px]">
+                                &lt;/&gt;
+                            </button>
                         </div>
                     </div>
 
@@ -253,7 +247,7 @@
                                 <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">github.com/</span>
                                 <input type="text" id="repository_url" name="repository_url"
                                     value="{{ old('repository_url', preg_replace('#^https?://github\.com/#', '', (string)$project->repository_url)) }}"
-                                    placeholder="rayhaneuh/sijaka-app"
+                                    placeholder="Isi Link Github"
                                     class="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-28 pr-4 text-xs text-white placeholder:text-white/30 focus:border-coral focus:outline-none transition">
                             </div>
                             @error('repository_url')
@@ -435,6 +429,59 @@
                 descInput.addEventListener('input', updateDesc);
                 updateDesc();
             }
+
+            window.formatDescription = function(type) {
+                const textarea = document.getElementById('project-description');
+                if (!textarea) return;
+
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const text = textarea.value;
+                const selected = text.substring(start, end);
+
+                let before = '';
+                let after = '';
+                let placeholder = '';
+
+                switch (type) {
+                    case 'bold':
+                        before = '**';
+                        after = '**';
+                        placeholder = 'teks tebal';
+                        break;
+                    case 'italic':
+                        before = '*';
+                        after = '*';
+                        placeholder = 'teks miring';
+                        break;
+                    case 'link':
+                        const url = prompt('Masukkan URL tautan:', 'https://');
+                        if (url === null) return;
+                        before = '[';
+                        after = `](${url.trim() || 'https://'})`;
+                        placeholder = 'teks tautan';
+                        break;
+                    case 'code':
+                        before = '`';
+                        after = '`';
+                        placeholder = 'kode';
+                        break;
+                }
+
+                const insertText = selected || placeholder;
+                const replacement = `${before}${insertText}${after}`;
+
+                textarea.focus();
+                textarea.setRangeText(replacement, start, end, 'select');
+
+                if (!selected) {
+                    textarea.setSelectionRange(start + before.length, start + before.length + placeholder.length);
+                } else {
+                    textarea.setSelectionRange(start, start + replacement.length);
+                }
+
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            };
 
             // 3. Category Buttons
             const categoryButtons = document.querySelectorAll('.category-btn');

@@ -10,7 +10,7 @@
 
     <div class="flex flex-1 flex-col pt-6">
         <h3 class="text-2xl font-semibold tracking-tight">{{ $project->title }}</h3>
-        <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">{{ $project->description }}</p>
+        <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">{!! Str::inlineMarkdown(e($project->description)) !!}</p>
 
         @if ($project->technologies)
             <ul class="mt-5 flex flex-wrap gap-2" aria-label="Teknologi yang digunakan">

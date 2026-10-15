@@ -53,7 +53,7 @@
         </div>
 
         {{-- 4 Stat Metric Cards --}}
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {{-- Proyek Card --}}
             <div class="rounded-2xl border border-white/5 bg-[#17171d] p-5 shadow-sm transition hover:border-white/10">
                 <div class="flex items-start justify-between">
@@ -91,22 +91,20 @@
                 </div>
             </div>
 
-            {{-- Sertifikat Card --}}
+            {{-- Pengalaman Card --}}
             <div class="rounded-2xl border border-white/5 bg-[#17171d] p-5 shadow-sm transition hover:border-white/10">
                 <div class="flex items-start justify-between">
                     <div>
-                        <p class="text-3xl font-bold tracking-tight text-white">{{ $certificatesCount }}</p>
-                        <p class="mt-1 text-sm font-medium text-white/80 whitespace-nowrap">Sertifikat</p>
+                        <p class="text-3xl font-bold tracking-tight text-white">{{ $experiencesCount }}</p>
+                        <p class="mt-1 text-sm font-medium text-white/80 whitespace-nowrap">Pengalaman</p>
                     </div>
                     <div class="flex size-10 items-center justify-center rounded-xl border border-white/5 bg-white/[0.03] text-white/60">
-                        <x-icon name="badge-check" class="size-4" />
+                        <x-icon name="briefcase" class="size-4" />
                     </div>
                 </div>
                 <div class="mt-4 flex items-center justify-between border-t border-white/5 pt-3 text-[11px]">
-                    <a href="{{ route('admin.certificates.create') }}" class="text-white/60 transition hover:text-white">
-                        + Unggah Bukti
-                    </a>
-                    <span class="text-white/40">{{ $certificatesCount }} tersimpan</span>
+                    <a href="{{ route('admin.experiences.index') }}" class="font-mono text-coral hover:underline">Kelola &rarr;</a>
+                    <span class="text-white/40">PKL &amp; Proyek</span>
                 </div>
             </div>
 
@@ -293,19 +291,19 @@
                     </div>
                 </div>
 
-                {{-- Lengkapi Sertifikat CTA Card --}}
+                {{-- Pengaturan Web CTA Card --}}
                 <div class="space-y-3 rounded-2xl border border-white/5 bg-[#17171d] p-5 shadow-sm">
                     <div class="flex size-9 items-center justify-center rounded-xl border border-coral/20 bg-coral/10 text-coral">
-                        <x-icon name="badge-check" class="size-4" />
+                        <x-icon name="sliders" class="size-4" />
                     </div>
-                    <h3 class="text-sm font-bold text-white">Lengkapi Sertifikat</h3>
+                    <h3 class="text-sm font-bold text-white">Pengaturan Konten Web</h3>
                     <p class="text-xs leading-relaxed text-white/50">
-                        Tambahkan sertifikat pelatihan atau kompetensi ke tabel publik portofolio untuk meningkatkan kredibilitas di mata rekruter.
+                        Kelola bio profil, banner hero, teks section, serta kurasi foto galeri visual bento grid portofolio Anda secara terpusat.
                     </p>
-                    <a href="{{ route('admin.certificates.index') }}"
+                    <a href="{{ route('admin.settings.index') }}"
                         class="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-xs font-medium text-white transition hover:bg-white/[0.08]">
-                        <x-icon name="plus" class="size-3.5 text-white/60" />
-                        <span>Buka Modul Sertifikat</span>
+                        <x-icon name="sliders" class="size-3.5 text-white/60" />
+                        <span>Buka Pengaturan Web</span>
                     </a>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\ContactMessage;
+use App\Models\Experience;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -49,8 +50,6 @@ class AdminTest extends TestCase
         $this->actingAs($this->admin())
             ->get('/admin')
             ->assertOk()
-            ->assertSee('Console Admin')
-            ->assertSee('Portfolio Hub')
             ->assertSee('Dashboard');
     }
 
@@ -137,5 +136,88 @@ class AdminTest extends TestCase
 
         $this->actingAs($admin)->delete("/admin/messages/{$message->id}")->assertRedirect('/admin/messages');
         $this->assertDatabaseCount('contact_messages', 0);
+    }
+
+    public function test_admin_can_view_settings(): void
+    {
+        $this->actingAs($this->admin())
+            ->get('/admin/settings')
+            ->assertOk()
+            ->assertSee('Pengaturan Konten');
+    }
+
+    public function test_admin_can_update_settings(): void
+    {
+        $this->actingAs($this->admin())
+            ->post('/admin/settings', [
+                'settings' => [
+                    'identity.name' => 'Muhammad Rayhan Updated',
+                ],
+            ])
+            ->assertRedirect('/admin/settings?tab=identity')
+            ->assertSessionHas('status');
+
+        $this->assertSame('Muhammad Rayhan Updated', setting('identity.name'));
+    }
+
+    public function test_admin_can_manage_experiences(): void
+    {
+        $admin = $this->admin();
+
+        // View index
+        $this->actingAs($admin)
+            ->get('/admin/experiences')
+            ->assertOk()
+            ->assertSee('Kelola Pengalaman');
+
+        // Create
+        $this->actingAs($admin)
+            ->post('/admin/experiences', [
+                'role' => 'Web Developer Intern',
+                'company' => 'Agency Digital',
+                'period' => '2024 — Sekarang',
+                'description' => 'Mengembangkan antarmuka dan API.',
+                'skills' => 'Laravel, Tailwind CSS, Vue',
+                'sort_order' => 1,
+            ])
+            ->assertRedirect('/admin/experiences');
+
+        $this->assertDatabaseHas('experiences', [
+            'role' => 'Web Developer Intern',
+            'company' => 'Agency Digital',
+        ]);
+
+        $experience = Experience::firstWhere('role', 'Web Developer Intern');
+        $this->assertSame(['Laravel', 'Tailwind CSS', 'Vue'], $experience->skills);
+
+        // Edit form
+        $this->actingAs($admin)
+            ->get("/admin/experiences/{$experience->id}/edit")
+            ->assertOk()
+            ->assertSee('Edit Riwayat Pengalaman');
+
+        // Update
+        $this->actingAs($admin)
+            ->put("/admin/experiences/{$experience->id}", [
+                'role' => 'Lead Frontend Developer',
+                'company' => 'Agency Digital',
+                'period' => '2024 — 2025',
+                'skills' => 'React, TypeScript',
+            ])
+            ->assertRedirect('/admin/experiences');
+
+        $this->assertDatabaseHas('experiences', [
+            'id' => $experience->id,
+            'role' => 'Lead Frontend Developer',
+        ]);
+
+        // Destroy
+        $this->actingAs($admin)
+            ->delete("/admin/experiences/{$experience->id}")
+            ->assertRedirect('/admin/experiences');
+
+        $this->assertDatabaseMissing('experiences', [
+            'id' => $experience->id,
+        ]);
     }
 }

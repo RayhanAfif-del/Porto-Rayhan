@@ -52,5 +52,7 @@ class PortfolioSeeder extends Seeder
                 'sort_order' => 0,
             ],
         );
+
+        $this->call(ExperienceSeeder::class);
     }
 }

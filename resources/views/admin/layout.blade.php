@@ -14,8 +14,9 @@
             'admin.dashboard' => ['label' => 'Dashboard', 'icon' => 'dashboard'],
             'admin.projects.index' => ['label' => 'Proyek', 'icon' => 'folder'],
             'admin.education.index' => ['label' => 'Pendidikan', 'icon' => 'graduation-cap'],
-            'admin.certificates.index' => ['label' => 'Sertifikat', 'icon' => 'badge-check'],
+            'admin.experiences.index' => ['label' => 'Pengalaman', 'icon' => 'briefcase'],
             'admin.messages.index' => ['label' => 'Pesan', 'icon' => 'mail'],
+            'admin.settings.index' => ['label' => 'Pengaturan Web', 'icon' => 'sliders'],
         ];
     @endphp
 
@@ -80,6 +81,11 @@
                     <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[11px] text-white/70">
                         <span class="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
                         <span>Live Console</span>
+                    </div>
+                    <div class="relative hidden sm:block">
+                        <x-icon name="search" class="pointer-events-none absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-white/35" />
+                        <input type="text" placeholder="Cari modul atau pengaturan..."
+                            class="w-64 rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-4 text-xs text-white placeholder:text-white/35 focus:border-white/20 focus:outline-none sm:w-80">
                     </div>
                 </div>
 

@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
-        $title = 'Muhammad Rayhan — Junior Web Developer & UI/UX Designer';
-        $desc = 'Portofolio Muhammad Rayhan, Junior Web Developer & UI/UX Designer yang berfokus pada pengembangan website modern dan pengalaman digital yang intuitif.';
+        $siteName = setting('identity.name', config('portfolio.name', 'Muhammad Rayhan'));
+        $siteRole = setting('identity.role', config('portfolio.role', 'Junior Web Developer & UI/UX Designer'));
+        $title = $siteName.' — '.$siteRole;
+        $desc = setting('identity.bio_summary', 'Portofolio '.$siteName.', '.$siteRole.' yang berfokus pada pengembangan website modern dan pengalaman digital yang intuitif.');
+        $ogImage = asset(setting('images.hero', config('portfolio.images.hero')));
     @endphp
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $desc }}">
@@ -17,7 +20,7 @@
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $desc }}">
     <meta property="og:url" content="{{ url('/') }}">
-    <meta property="og:image" content="{{ asset(config('portfolio.images.hero')) }}">
+    <meta property="og:image" content="{{ $ogImage }}">
     <meta property="og:locale" content="id_ID">
     <meta name="twitter:card" content="summary_large_image">
 

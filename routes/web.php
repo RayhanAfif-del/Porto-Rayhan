@@ -29,7 +29,12 @@ Route::prefix('admin')->group(function () {
         Route::patch('projects/{project}/toggle-publish', [Admin\ProjectController::class, 'togglePublish'])->name('projects.toggle-publish');
         Route::resource('projects', Admin\ProjectController::class)->except('show');
         Route::resource('education', Admin\EducationController::class)->except('show');
-        Route::resource('certificates', Admin\CertificateController::class)->except('show');
+        Route::resource('experiences', Admin\ExperienceController::class)->except('show');
         Route::resource('messages', Admin\MessageController::class)->only(['index', 'show', 'destroy']);
+
+        Route::get('settings', [Admin\SiteSettingController::class, 'index'])->name('settings.index');
+        Route::post('settings', [Admin\SiteSettingController::class, 'update'])->name('settings.update');
+        Route::post('settings/image', [Admin\SiteSettingController::class, 'uploadImage'])->name('settings.upload-image');
+        Route::post('settings/gallery-image', [Admin\SiteSettingController::class, 'uploadGalleryImage'])->name('settings.upload-gallery-image');
     });
 });

@@ -4,15 +4,15 @@
         ['About', 'about'],
         ['Skills', 'skills'],
         ['Projects', 'projects'],
-        ['Education & Certificates', 'education'],
+        ['Education & Experience', 'education'],
         ['Contact', 'contact'],
     ];
 @endphp
 
 <header data-navbar class="fixed inset-x-0 top-0 z-50">
     <div class="container-x flex h-[4.5rem] items-center justify-between">
-        <a href="#home" data-nav-link="home" class="text-xl font-semibold tracking-tight text-white after:hidden" aria-label="Rayhan, kembali ke atas">
-            Rayhan<span class="text-coral">.</span>
+        <a href="#home" data-nav-link="home" class="text-xl font-semibold tracking-tight text-white after:hidden" aria-label="{{ setting('identity.short_name', config('portfolio.short_name', 'Rayhan')) }}, kembali ke atas">
+            {{ setting('identity.short_name', config('portfolio.short_name', 'Rayhan')) }}<span class="text-coral">.</span>
         </a>
 
         <nav aria-label="Navigasi utama" class="hidden lg:block">

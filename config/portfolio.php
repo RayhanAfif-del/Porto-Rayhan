@@ -42,4 +42,22 @@ return [
             ['src' => 'images/gallery-4.svg', 'alt' => 'Placeholder dokumentasi proyek 4', 'class' => 'md:col-span-8 aspect-[16/9] md:aspect-[16/8]'],
         ],
     ],
+
+    // Daftar pengalaman kerja, praktik lapangan (PKL/Prakerin), atau freelance
+    'experiences' => [
+        [
+            'role' => 'Frontend & Web Developer Intern',
+            'company' => 'Digital Agency / Prakerin',
+            'period' => '2024 — 2025',
+            'description' => 'Mengembangkan antarmuka web responsif, slicing komponen UI/UX dari Figma ke Tailwind CSS & Blade, dan integrasi API RESTful.',
+            'skills' => ['Laravel', 'Tailwind CSS', 'Figma', 'JavaScript'],
+        ],
+        [
+            'role' => 'Freelance Web Developer & UI Designer',
+            'company' => 'Proyek Independen',
+            'period' => '2023 — Sekarang',
+            'description' => 'Merancang UI/UX modern dan membangun website sistem informasi serta landing page fungsional untuk berbagai kebutuhan klien.',
+            'skills' => ['UI/UX Design', 'PHP', 'MySQL', 'Figma'],
+        ],
+    ],
 ];
