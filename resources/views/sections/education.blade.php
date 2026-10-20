@@ -29,12 +29,12 @@
 <section id="education" class="bg-offwhite py-24 sm:py-32 lg:py-40">
     <div class="container-x">
         <x-section-label data-reveal>EDUCATION &amp; EXPERIENCE</x-section-label>
-        <h2 data-reveal class="headline max-w-[20ch]">Learning &amp; journey that shapes how I build.</h2>
+        <h2 data-reveal data-delay="100" class="headline max-w-[20ch]">Learning &amp; journey that shapes how I build.</h2>
 
         <div class="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-16">
-            {{-- Column 1: Education (lg:col-span-6) --}}
-            <div class="lg:col-span-6">
-                <div data-reveal class="mb-8 flex items-center gap-3">
+            {{-- Column 1: Education (lg:col-span-6) -- Left col first (100ms) --}}
+            <div data-reveal data-delay="100" class="lg:col-span-6">
+                <div class="mb-8 flex items-center gap-3">
                     <div class="flex size-9 items-center justify-center rounded-2xl bg-ink text-white shadow-sm">
                         <x-icon name="graduation-cap" class="size-4" />
                     </div>
@@ -46,7 +46,7 @@
 
                 <div class="space-y-2">
                     @forelse ($education as $edu)
-                        <div data-reveal class="relative border-l border-ink/20 pb-8 pl-7 last:border-transparent last:pb-0">
+                        <div data-reveal data-delay="{{ min(150 + ($loop->index * 100), 500) }}" class="relative border-l border-ink/20 pb-8 pl-7 last:border-transparent last:pb-0">
                             <span class="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-coral ring-4 ring-offwhite" aria-hidden="true"></span>
                             @if ($edu->period)<p class="font-mono text-xs font-medium text-coral">{{ $edu->period }}</p>@endif
                             <h4 class="mt-1 text-lg font-semibold tracking-tight text-ink">{{ $edu->school }}</h4>
@@ -59,9 +59,9 @@
                 </div>
             </div>
 
-            {{-- Column 2: Experience (lg:col-span-6) --}}
-            <div class="lg:col-span-6">
-                <div data-reveal class="mb-8 flex items-center gap-3">
+            {{-- Column 2: Experience (lg:col-span-6) -- Right col second (300ms) --}}
+            <div data-reveal data-delay="300" class="lg:col-span-6">
+                <div class="mb-8 flex items-center gap-3">
                     <div class="flex size-9 items-center justify-center rounded-2xl bg-ink text-white shadow-sm shadow-coral/20">
                         <x-icon name="briefcase" class="size-4" />
                     </div>
@@ -80,7 +80,7 @@
                             $eDesc = is_object($exp) ? $exp->description : ($exp['description'] ?? null);
                             $eSkills = is_object($exp) ? $exp->skills : ($exp['skills'] ?? []);
                         @endphp
-                        <div data-reveal class="relative border-l border-ink/20 pb-8 pl-7 last:border-transparent last:pb-0">
+                        <div data-reveal data-delay="{{ min(350 + ($loop->index * 80), 500) }}" class="relative border-l border-ink/20 pb-8 pl-7 last:border-transparent last:pb-0">
                             <span class="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-coral ring-4 ring-offwhite" aria-hidden="true"></span>
                             @if (!empty($ePeriod))
                                 <p class="font-mono text-xs font-medium text-coral">{{ $ePeriod }}</p>

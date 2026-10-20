@@ -28,19 +28,19 @@
     <div class="container-x">
         <div class="space-y-6">
             <div>
-                <x-section-label :dark="true" data-reveal>{{ setting('services.label', 'SKILLS & SERVICES') }}</x-section-label>
-                <h2 data-reveal class="display" style="font-size:clamp(2.5rem,6.5vw,5.5rem)">
+                <x-section-label :dark="true" data-reveal="left">{{ setting('services.label', 'SKILLS & SERVICES') }}</x-section-label>
+                <h2 data-reveal="left" data-delay="100" class="display" style="font-size:clamp(2.5rem,6.5vw,5.5rem)">
                     {{ setting('services.headline', 'What I Can Do') }}
                 </h2>
             </div>
-            <p data-reveal class="max-w-2xl text-base leading-relaxed text-white/60">
+            <p data-reveal="left" data-delay="200" class="max-w-2xl text-base leading-relaxed text-white/60">
                 {{ setting('services.description', 'Menggabungkan pengembangan web dan desain antarmuka untuk membangun pengalaman digital yang fungsional, responsif, dan menarik.') }}
             </p>
         </div>
 
         <ol class="mt-16 border-t border-white/15 sm:mt-20">
             @foreach ($services as $i => $s)
-                <li data-reveal class="group grid gap-6 border-b border-white/15 py-10 transition-colors hover:bg-white/[0.03] lg:grid-cols-12 lg:gap-10 lg:py-14">
+                <li data-reveal="left" data-delay="{{ min(($i + 1) * 100, 500) }}" class="group grid gap-6 border-b border-white/15 py-10 transition-colors hover:bg-white/[0.03] lg:grid-cols-12 lg:gap-10 lg:py-14">
                     <div class="flex items-start gap-5 lg:col-span-5">
                         <span class="pt-2 text-xs font-medium text-white/40">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         <h3 class="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.6rem]">{{ $s['title'] ?? 'Layanan' }}</h3>

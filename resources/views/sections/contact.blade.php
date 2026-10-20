@@ -26,23 +26,23 @@
 <section id="contact" class="bg-ink py-20 text-white sm:py-28 lg:py-32">
     <div class="container-x">
         <div class="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
-            {{-- Left Column: Header, Narrative & Quick Contact Cards --}}
-            <div class="lg:col-span-5 flex flex-col justify-between">
+            {{-- Left Column: Header, Narrative & Quick Contact Cards (Left Slide) --}}
+            <div data-reveal="left" class="lg:col-span-5 flex flex-col justify-between">
                 <div>
-                    <x-section-label :dark="true" data-reveal>CONTACT</x-section-label>
+                    <x-section-label :dark="true">{{ setting('contact.label', 'CONTACT') }}</x-section-label>
                     
-                    <h2 data-reveal class="headline text-white mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                    <h2 class="headline text-white mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
                         Have a Project in Mind?<br class="hidden sm:inline" />
                         <span class="text-coral">Let's Talk.</span>
                     </h2>
 
-                    <p data-reveal class="mt-4 text-[0.95rem] leading-relaxed text-white/65">
+                    <p class="mt-4 text-[0.95rem] leading-relaxed text-white/65">
                         Open to learning opportunities, collaborations, internships, and projects involving functional website development or UI/UX design.                
                     </p>
                 </div>
 
                 {{-- Direct Contact & Social Media Action Cards --}}
-                <div data-reveal class="mt-6 space-y-2.5">
+                <div class="mt-6 space-y-2.5">
                     @foreach ($channels as [$label, $url, $text, $icon])
                         @if ($url && $text)
                             <a href="{{ $url }}" @if (! str_starts_with($url, 'mailto:')) target="_blank" rel="noopener noreferrer" @endif
@@ -63,8 +63,8 @@
                 </div>
             </div>
 
-            {{-- Right Column: Compact Form Card (Equal Height) --}}
-            <div data-reveal class="lg:col-span-7 flex flex-col">
+            {{-- Right Column: Compact Form Card (Right Slide) --}}
+            <div data-reveal="right" data-delay="150" class="lg:col-span-7 flex flex-col">
                 <div class="h-full rounded-3xl border border-white/10 bg-[#16161c]/90 p-6 sm:p-8 shadow-2xl backdrop-blur-sm flex flex-col justify-between">
                     <div class="mb-5 flex items-center justify-between border-b border-white/5 pb-4">
                         <div>

@@ -1,6 +1,6 @@
 @props(['project'])
 
-<article data-category="{{ $project->category }}" class="project-item group flex flex-col">
+<article data-reveal="zoom" {{ $attributes->merge(['class' => 'project-item group flex flex-col', 'data-category' => $project->category]) }}>
     <div class="relative overflow-hidden rounded-3xl bg-offwhite">
         <img src="{{ $project->image_url }}" data-fallback="{{ asset('images/project-placeholder.svg') }}"
             alt="Tampilan proyek {{ $project->title }}" width="1200" height="800" loading="lazy" decoding="async"

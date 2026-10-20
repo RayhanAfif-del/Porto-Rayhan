@@ -1,4 +1,4 @@
-<section id="technologies" aria-label="Teknologi yang digunakan" class="border-b border-line bg-paper py-8 sm:py-10">
+<section id="technologies" data-reveal aria-label="Teknologi yang digunakan" class="border-b border-line bg-paper py-8 sm:py-10">
     {{-- Mobile: daftar rapi tanpa animasi --}}
     <ul class="container-x flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-muted md:hidden">
         @foreach ($technologies as $tech)

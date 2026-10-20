@@ -31,6 +31,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('education', Admin\EducationController::class)->except('show');
         Route::resource('experiences', Admin\ExperienceController::class)->except('show');
         Route::resource('messages', Admin\MessageController::class)->only(['index', 'show', 'destroy']);
+        Route::post('messages/{message}/reply', [Admin\MessageController::class, 'reply'])->name('messages.reply');
 
         Route::get('settings', [Admin\SiteSettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [Admin\SiteSettingController::class, 'update'])->name('settings.update');

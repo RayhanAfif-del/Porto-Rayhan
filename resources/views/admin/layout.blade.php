@@ -45,7 +45,12 @@
                         <a href="{{ route($route) }}"
                             class="flex items-center gap-3 whitespace-nowrap rounded-xl px-3.5 py-2.5 text-xs font-medium transition {{ $isActive ? 'bg-coral text-white shadow-lg shadow-coral/25' : 'text-white/60 hover:bg-white/[0.04] hover:text-white' }}">
                             <x-icon :name="$item['icon']" class="size-4 shrink-0 {{ $isActive ? 'text-white' : 'text-white/60' }}" />
-                            <span>{{ $item['label'] }}</span>
+                            <span class="flex-1">{{ $item['label'] }}</span>
+                            @if ($route === 'admin.messages.index' && ($unreadMessagesCount ?? 0) > 0)
+                                <span class="ml-auto rounded-full {{ $isActive ? 'bg-white/30 text-white' : 'bg-coral text-white' }} px-1.5 py-0.5 text-[10px] font-bold leading-none">
+                                    {{ $unreadMessagesCount }}
+                                </span>
+                            @endif
                         </a>
                     @endforeach
 

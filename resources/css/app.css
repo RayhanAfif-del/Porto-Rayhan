@@ -82,17 +82,102 @@
     }
 }
 
-/* Animasi reveal: hanya aktif jika JS berjalan (class .js ditambahkan di <html>) */
-.js [data-reveal] {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    transition-delay: var(--reveal-delay, 0ms);
+/* ==========================================================================
+   Section Entrance Keyframes & Scroll Reveal System
+   ========================================================================== */
+@keyframes revealFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
+@keyframes revealZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes revealLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes revealRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Stagger delay utility classes */
+[data-delay="80"] { --reveal-delay: 80ms; }
+[data-delay="100"] { --reveal-delay: 100ms; }
+[data-delay="120"] { --reveal-delay: 120ms; }
+[data-delay="150"] { --reveal-delay: 150ms; }
+[data-delay="200"] { --reveal-delay: 200ms; }
+[data-delay="250"] { --reveal-delay: 250ms; }
+[data-delay="300"] { --reveal-delay: 300ms; }
+[data-delay="350"] { --reveal-delay: 350ms; }
+[data-delay="400"] { --reveal-delay: 400ms; }
+[data-delay="450"] { --reveal-delay: 450ms; }
+[data-delay="500"] { --reveal-delay: 500ms; }
+
+/* Inisial state saat JS aktif: elemen bergeser dan transparan sebelum di-scroll */
+.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+}
+
+/* Inisial state spesifik varian */
+.js [data-reveal="zoom"] {
+    opacity: 0;
+    transform: scale(0.88);
+}
+
+.js [data-reveal="left"] {
+    opacity: 0;
+    transform: translateX(-60px);
+}
+
+.js [data-reveal="right"] {
+    opacity: 0;
+    transform: translateX(60px);
+}
+
+.js [data-reveal="fade"],
+.js [data-reveal="fade-up"] {
+    opacity: 0;
+    transform: translateY(48px);
+}
+
+/* State aktif: elemen masuk/muncul ("in") dengan mulus ke posisi aslinya */
 .js [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
 }
 
 /* Marquee teknologi */
@@ -128,35 +213,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .js [data-reveal] {
-        opacity: 1;
-        transform: none;
-    }
-
-    .marquee-track {
-        animation: none;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-
-    .marquee-dup {
-        display: none;
-    }
-}
-
 @layer components {
     /* Navbar */
     [data-navbar] {
@@ -176,6 +232,7 @@
     }
 
     [data-nav-link]:hover,
+    [data-nav-link].active,
     [data-nav-link].is-active {
         color: #fff;
     }
@@ -194,7 +251,15 @@
         border-radius: 9999px;
     }
 
+    [data-nav-link].active::after,
     [data-nav-link].is-active::after {
         transform: scaleX(1);
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+        height: 3px;
+        z-index: 9999;
+        background: linear-gradient(90deg, #6366f1 0%, #a855f7 50%, #8b5cf6 100%);
     }
 }

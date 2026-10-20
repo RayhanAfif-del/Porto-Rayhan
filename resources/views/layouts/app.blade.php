@@ -28,6 +28,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    {{-- Global Scroll Progress Indicator --}}
+    <div id="scroll-progress" class="fixed inset-x-0 top-0 z-[9999] h-[3px] origin-left scale-x-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 transition-transform duration-75 ease-out" aria-hidden="true"></div>
+
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-coral focus:px-5 focus:py-3 focus:text-white">Lewati ke konten utama</a>
 
     <x-navbar />
