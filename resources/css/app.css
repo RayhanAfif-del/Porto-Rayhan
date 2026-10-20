@@ -160,16 +160,13 @@
 @layer components {
     /* Navbar */
     [data-navbar] {
-        transition: background-color 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-        border-bottom: 1px solid transparent;
+        transition: transform 0.4s var(--ease-out-expo), opacity 0.4s;
     }
 
-    [data-navbar].is-scrolled,
-    [data-navbar].is-menu-open {
-        background: rgb(12 12 14 / 0.88);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-bottom-color: rgb(255 255 255 / 0.08);
+    [data-navbar].is-scrolled > div:first-child {
+        background: rgb(18 18 23 / 0.92);
+        border-color: rgb(255 255 255 / 0.22);
+        box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
     }
 
     [data-nav-link] {
@@ -188,12 +185,13 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: -6px;
-        height: 2px;
+        bottom: -2px;
+        height: 2.5px;
         background: var(--color-coral);
         transform: scaleX(0);
-        transform-origin: left;
+        transform-origin: center;
         transition: transform 0.4s var(--ease-out-expo);
+        border-radius: 9999px;
     }
 
     [data-nav-link].is-active::after {
