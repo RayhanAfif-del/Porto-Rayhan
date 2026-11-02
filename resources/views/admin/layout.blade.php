@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Admin') — Portofolio Rayhan</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">

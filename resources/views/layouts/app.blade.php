@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @php
         $siteName = setting('identity.name', config('portfolio.name', 'Muhammad Rayhan'));
         $siteRole = setting('identity.role', config('portfolio.role', 'Junior Web Developer & UI/UX Designer'));
