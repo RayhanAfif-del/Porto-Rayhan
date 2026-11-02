@@ -6,16 +6,18 @@
       "runtime": "vercel-php@0.7.4"
     }
   },
-  "buildCommand": "npm run build",
-  "outputDirectory": "public",
   "routes": [
     {
       "src": "/build/(.*)",
       "dest": "/public/build/$1"
     },
     {
-      "src": "/(favicon\\.ico|robots\\.txt|manifest\\.json)",
+      "src": "/(favicon\\.ico|favicon\\.svg|robots\\.txt|manifest\\.json)",
       "dest": "/public/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
     },
     {
       "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|ttf|woff|woff2|eot|otf|webp|avif))",
@@ -29,6 +31,7 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
+    "ASSET_URL": "",
     "APP_CONFIG_CACHE": "/tmp/bootstrap/cache/config.php",
     "APP_EVENTS_CACHE": "/tmp/bootstrap/cache/events.php",
     "APP_PACKAGES_CACHE": "/tmp/bootstrap/cache/packages.php",
