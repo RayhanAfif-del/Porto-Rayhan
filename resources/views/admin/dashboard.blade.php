@@ -291,6 +291,22 @@
                     </div>
                 </div>
 
+                {{-- Profil & Keamanan Admin Card --}}
+                <div class="space-y-3 rounded-2xl border border-white/5 bg-[#17171d] p-5 shadow-sm">
+                    <div class="flex size-9 items-center justify-center rounded-xl border border-coral/20 bg-coral/10 text-coral">
+                        <x-icon name="user" class="size-4" />
+                    </div>
+                    <h3 class="text-sm font-bold text-white">Profil & Kata Sandi Admin</h3>
+                    <p class="text-xs leading-relaxed text-white/50">
+                        Atur nama tampilan, email login, serta perbarui kata sandi untuk mengamankan akses ke dashboard administrator.
+                    </p>
+                    <a href="{{ route('admin.profile.edit') }}"
+                        class="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-xs font-medium text-white transition hover:bg-white/[0.08]">
+                        <x-icon name="lock" class="size-3.5 text-white/60" />
+                        <span>Kelola Profil & Sandi</span>
+                    </a>
+                </div>
+
                 {{-- Pengaturan Web CTA Card --}}
                 <div class="space-y-3 rounded-2xl border border-white/5 bg-[#17171d] p-5 shadow-sm">
                     <div class="flex size-9 items-center justify-center rounded-xl border border-coral/20 bg-coral/10 text-coral">

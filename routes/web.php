@@ -33,6 +33,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('messages', Admin\MessageController::class)->only(['index', 'show', 'destroy']);
         Route::post('messages/{message}/reply', [Admin\MessageController::class, 'reply'])->name('messages.reply');
 
+        Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('profile', [Admin\ProfileController::class, 'update'])->name('profile.update');
+        Route::put('profile/password', [Admin\ProfileController::class, 'updatePassword'])->name('profile.password.update');
+
         Route::get('settings', [Admin\SiteSettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [Admin\SiteSettingController::class, 'update'])->name('settings.update');
         Route::post('settings/image', [Admin\SiteSettingController::class, 'uploadImage'])->name('settings.upload-image');

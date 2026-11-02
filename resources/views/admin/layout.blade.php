@@ -16,6 +16,7 @@
             'admin.education.index' => ['label' => 'Pendidikan', 'icon' => 'graduation-cap'],
             'admin.experiences.index' => ['label' => 'Pengalaman', 'icon' => 'briefcase'],
             'admin.messages.index' => ['label' => 'Pesan', 'icon' => 'mail'],
+            'admin.profile.edit' => ['label' => 'Profil & Akun', 'icon' => 'user'],
             'admin.settings.index' => ['label' => 'Pengaturan Web', 'icon' => 'sliders'],
         ];
     @endphp
@@ -80,20 +81,7 @@
         {{-- Main Area --}}
         <div class="flex min-w-0 flex-1 flex-col">
             {{-- Topbar --}}
-            <header class="sticky top-0 z-30 flex items-center justify-between border-b border-white/5 bg-[#121217]/80 px-6 py-3.5 backdrop-blur-md">
-                {{-- Search & Live Console Pill --}}
-                <div class="flex items-center gap-4">
-                    <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[11px] text-white/70">
-                        <span class="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
-                        <span>Live Console</span>
-                    </div>
-                    <div class="relative hidden sm:block">
-                        <x-icon name="search" class="pointer-events-none absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-white/35" />
-                        <input type="text" placeholder="Cari modul atau pengaturan..."
-                            class="w-64 rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-4 text-xs text-white placeholder:text-white/35 focus:border-white/20 focus:outline-none sm:w-80">
-                    </div>
-                </div>
-
+            <header class="sticky top-0 z-30 flex items-center justify-end border-b border-white/5 bg-[#121217]/80 px-6 py-3.5 backdrop-blur-md">
                 {{-- Notifications & Profile --}}
                 <div class="flex items-center gap-4">
                     <button type="button" aria-label="Notifikasi"
@@ -104,15 +92,15 @@
                         @endif
                     </button>
 
-                    <div class="flex items-center gap-3 pl-2">
+                    <a href="{{ route('admin.profile.edit') }}" class="group flex items-center gap-3 pl-2 transition hover:opacity-90" title="Buka Profil & Pengaturan Akun">
                         <div class="text-right">
-                            <p class="text-xs font-semibold leading-tight text-white">{{ Auth::user()->name ?? 'Rayhan' }}</p>
+                            <p class="text-xs font-semibold leading-tight text-white transition-colors group-hover:text-coral">{{ Auth::user()->name ?? 'Rayhan' }}</p>
                             <p class="text-[10px] text-white/40">Superadmin</p>
                         </div>
-                        <div class="flex size-9 items-center justify-center rounded-full border border-white/15 bg-gradient-to-tr from-coral/40 to-white/10 font-semibold text-white shadow-inner">
+                        <div class="flex size-9 items-center justify-center rounded-full border border-white/15 bg-gradient-to-tr from-coral/40 to-white/10 font-semibold text-white shadow-inner transition group-hover:border-coral/50">
                             {{ strtoupper(substr(Auth::user()->name ?? 'R', 0, 1)) }}
                         </div>
-                    </div>
+                    </a>
                 </div>
             </header>
 

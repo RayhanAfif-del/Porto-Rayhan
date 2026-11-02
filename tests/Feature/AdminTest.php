@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -219,5 +220,99 @@ class AdminTest extends TestCase
         $this->assertDatabaseMissing('experiences', [
             'id' => $experience->id,
         ]);
+    }
+
+    public function test_admin_can_view_profile_page(): void
+    {
+        $this->actingAs($this->admin())
+            ->get('/admin/profile')
+            ->assertOk()
+            ->assertSee('Profil & Pengaturan Akun')
+            ->assertSee('Informasi Profil Admin')
+            ->assertSee('Ganti Kata Sandi');
+    }
+
+    public function test_admin_can_update_profile_information(): void
+    {
+        $admin = $this->admin();
+
+        $this->actingAs($admin)
+            ->patch('/admin/profile', [
+                'name' => 'Rayhan Afif Super',
+                'email' => 'newrayhan@example.com',
+            ])
+            ->assertRedirect('/admin/profile')
+            ->assertSessionHas('status', 'Informasi profil admin berhasil diperbarui.');
+
+        $this->assertDatabaseHas('users', [
+            'id' => $admin->id,
+            'name' => 'Rayhan Afif Super',
+            'email' => 'newrayhan@example.com',
+        ]);
+    }
+
+    public function test_admin_cannot_use_email_of_another_user(): void
+    {
+        User::factory()->create(['email' => 'existing@example.com']);
+        $admin = $this->admin();
+
+        $this->actingAs($admin)
+            ->patch('/admin/profile', [
+                'name' => 'Admin Baru',
+                'email' => 'existing@example.com',
+            ])
+            ->assertSessionHasErrors('email');
+    }
+
+    public function test_admin_can_update_password(): void
+    {
+        $admin = User::factory()->create([
+            'is_admin' => true,
+            'password' => 'password-lama-123',
+        ]);
+
+        $this->actingAs($admin)
+            ->put('/admin/profile/password', [
+                'current_password' => 'password-lama-123',
+                'password' => 'password-baru-456',
+                'password_confirmation' => 'password-baru-456',
+            ])
+            ->assertRedirect('/admin/profile')
+            ->assertSessionHas('status', 'Kata sandi berhasil diubah.');
+
+        $admin->refresh();
+        $this->assertTrue(Hash::check('password-baru-456', $admin->password));
+    }
+
+    public function test_admin_cannot_update_password_with_wrong_current_password(): void
+    {
+        $admin = User::factory()->create([
+            'is_admin' => true,
+            'password' => 'password-lama-123',
+        ]);
+
+        $this->actingAs($admin)
+            ->put('/admin/profile/password', [
+                'current_password' => 'salah-password',
+                'password' => 'password-baru-456',
+                'password_confirmation' => 'password-baru-456',
+            ])
+            ->assertSessionHasErrors('current_password');
+    }
+
+    public function test_admin_cannot_update_password_with_mismatched_confirmation(): void
+    {
+        $admin = User::factory()->create([
+            'is_admin' => true,
+            'password' => 'password-lama-123',
+        ]);
+
+        $this->actingAs($admin)
+            ->put('/admin/profile/password', [
+                'current_password' => 'password-lama-123',
+                'password' => 'password-baru-456',
+                'password_confirmation' => 'password-beda-789',
+            ])
+            ->assertSessionHasErrors('password');
     }
 }

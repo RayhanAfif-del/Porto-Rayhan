@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+/.git
+/storage/*.key
+.env
+.env.*
+public/hot
+tests
